@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="balls-background" id="body-background">
+        <div class="ball right ball-1"></div>
+        <div class="ball right ball-2"></div>
+        <div class="ball right ball-3"></div>
+        <div class="ball left ball-1"></div>
+        <div class="ball left ball-2"></div>
+        <div class="ball left ball-3"></div>
+    </div>
+
+    <div id="card1" class="card">
+        <p class="titulo card-1">Fazer Login</p>
+        <div id="form-login">
+            <input class="form-control" type="text" id="usuario" placeholder="Login" onkeydown="checkEnter(event)" oninput="verificar()" >
+            <input class="form-control" type="password" id="senha" placeholder="Senha" onkeydown="checkEnter(event)" oninput="verificar()" >
+            <button id="enviar" class="btn btn-submit" disabled onclick="logar()">Entrar</button>
+        </div>
+        <p id="erro" class="text-danger mt-1 mb-0 mx-auto"></p>
+    </div>
+
+    <div id="card2" class="card">
+        <p class="titulo card-2">Olá, </p>
+        <p class="texto">Você acaba de obter acesso antecipado ao site, usuários com acesso antecipado também recebem um voucher, para resgatar o seu voucher clique no botão abaixo.</p>
+        <button type="button" class="btn btn-submit" data-bs-toggle="modal" data-bs-target="#Voucher">Resgatar Voucher</button>
+        <p class="texto mt-2">Para uma experiência mais completa, é recomendado que leia o alerta de cookies.</p>
+    </div>
+    
+    <button type="button" class="btn btn-primary" style="display: none;" id="liveToastBtn"></button> 
+    <div class="toast-container position-fixed bottom-0 start-50 translate-middle-x" style="width: 100%;">
+      <div id="liveToast" style="width: 100%;" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header" style="color: black;">
+          <strong class="me-auto">🍪 Alerta de Cookies</strong>
+          <small>Agora</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            <p class="card-text" style="font-size: 15px;">Você é como uma porção de cookies recém preparada: quente, gostosa e impossível de resistir!
+                                        Posso te levar para uma 'sessão de cookies' privada? Quero te conhecer cada vez mais enquanto degustamos da sessão!
+                                        Estou aqui, pronto para saborear cada momento ao seu lado! 
+                                        Vamos compartilhar essa 'conexão'? 🍪</p>
+            <div class="mt-2 pt-2 botoesCard">
+                <button data-bs-dismiss="toast" id="fechar" style="display: none;"></button>
+                <a href="https://www.youtube.com/watch?v=GYQ8G8Zqkfg" onclick="fecharToast()" target="_blank" class="btn btn-secondary btn-sm px-3">Não Discordar</a>
+                <a href="https://www.youtube.com/watch?v=rZnO4Yx6mqE" onclick="fecharToast()" target="_blank" class="btn btn-danger btn-sm px-3">Concordar</a>
+            </div>
+          </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="Voucher" tabindex="-1" aria-labelledby="VoucherLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <strong class="modal-title fs-5 mx-auto" id="VoucherLabel"></strong>
+            </div>
+            <div class="modal-body d-flex">
+              <p>ID do Voucher: <spam class="d-flex justify-content-center" style="width: fit-content;border: 1px black solid;padding: 0.3rem;border-radius: 10px;">V4L3TDS2</spam><br>
+              Com esse voucher você tem direito a:</p>
+              <ul>
+                <li>1x Massagem Corporal</li>
+                <li>1x Noite de Conversas</li>
+                <li>1x Noite de Filmes/Séries</li>
+                <li>1x Degustação de Vinho</li>
+                <li>1x Green/Brown Session</li>
+                <li>Beijos Ilimitados</li>
+                <li>Cafuné</li>
+                <li>E mais...</li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Fechar</button>
+              <a href="https://wa.me/5579988595156?text=Oi,%20recebi%20o%20voucher%20ID:%20V4L3TDS2%20no%20site%20e%20quero%20resgatá-lo.%20Qual%20o%20melhor%20dia?" target="_blank" type="button" class="btn btn-success text-white d-flex" style="gap: 5px;"><i class="fa fa-whatsapp"></i>Enviar Mensagem</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <iframe width="560" height="315" style="display: none;" src="https://www.youtube.com/embed/bG6-SDGypu4?si=4NVwXkcYXzns29nu&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<style>
+
+    @media (max-width: 768px) {
+        .ball {
+        height: 10vh!important;
+        width: 10vh!important;
+        }
+
+        .ball:before,.ball:after  {
+        height: 10vh!important;
+        width: 10vh!important;
+        }
+
+        .ball:before {
+        top: -5vh!important;
+        }
+
+        .ball:after {
+        left: 5vh!important;
+        }
+
+        .card {
+        width: 70%!important;
+        margin-top: 5rem!important;
+        padding: 5% 5%!important;
+        }
+
+        .card-text {
+        text-align: start!important;
+        }
+        #card2 {
+            height: 60%!important;
+        }
+    }
+
+    .card-text {
+        text-align: end;
+    }
+
+    .ball {
+    margin: 200px;
+    background-color: rgb(255, 0, 0);
+    height: 25vh;
+    transform: rotate(-45deg);
+    width: 25vh;
+    position: absolute;
+    opacity: 0;
+    }
+    
+    .ball:before,
+    .ball:after {
+      content: "";
+      background-color: red;
+      border-radius: 50%;
+      height: 25vh;
+      position: absolute;
+      width: 25vh;
+    }
+
+    .ball:before {
+        top: -12.5vh;
+    }
+
+    .ball:after {
+        left: 12.5vh;
+    }
+
+    .right {
+        animation: moveBallsRight 5s linear infinite;  
+    }
+
+    .left {
+        animation: moveBallsLeft 5s linear infinite;
+    }
+
+    .ball-1 {
+        animation-delay: 0s;
+    }
+
+    .ball-2 {
+        animation-delay: 1s;
+    }
+
+    .ball-3 {
+        animation-delay: 2s;
+    }
+    
+    @keyframes moveBallsRight {
+    0% {
+        transform: rotate(0deg) translateY(100vh);
+        opacity: 1;
+    }
+    10% {
+        transform: rotate(36deg) translateY(90vh);
+    }
+    20% {
+        transform: rotate(72deg) translateY(80vh);
+    }
+    30% {
+        transform: rotate(108deg) translateY(70vh);
+    }
+    40% {
+        transform: rotate(144deg) translateY(60vh);
+    }
+    50% {
+        transform: rotate(180deg) translateY(50vh);
+    }
+    60% {
+        transform: rotate(216deg) translateY(40vh);
+    }
+    70% {
+        transform: rotate(252deg) translateY(30vh);
+    }
+    80% {
+        transform: rotate(288deg) translateY(20vh);
+    }
+    90% {
+        transform: rotate(324deg) translateY(10vh);
+    }
+    100% {
+        transform: rotate(360deg) translateY(0vh);
+        opacity: 0;
+    }
+}
+    @keyframes moveBallsLeft {
+    0% {
+        transform: rotate(0deg) translateY(-100vh);
+        opacity: 1;
+    }
+    10% {
+        transform: rotate(36deg) translateY(-90vh);  
+    }
+    20% {
+        transform: rotate(72deg) translateY(-80vh);  
+    }
+    30% {
+        transform: rotate(108deg) translateY(-70vh);
+    }
+    40% {
+        transform: rotate(144deg) translateY(-60vh);
+    }
+    50% {
+        transform: rotate(180deg) translateY(-50vh);
+    }
+    60% {
+        transform: rotate(216deg) translateY(-40vh);
+    }
+    70% {
+        transform: rotate(252deg) translateY(-30vh);
+    }
+    80% {
+        transform: rotate(288deg) translateY(-20vh);
+    }
+    90% {
+        transform: rotate(324deg) translateY(-10vh);
+    }
+    100% {
+        transform: rotate(360deg) translateY(0vh);
+        opacity: 0;
+    }
+}
+    .botoesCard {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+    }
+
+    #card2 {
+        display: none;
+    }
+
+    #erro {
+        display: none;
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding-top: 5%;
+        background: red;
+    }
+    
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 30%;
+        height: 40%;
+        padding: 4% 2%;
+        border: rgba(255, 0, 0, 0.187) 1px solid;
+        border-radius: 20px;
+        background: linear-gradient(145deg,rgba(255, 150, 150, 0.242), rgba(255, 150, 150, 0.053) );
+        box-shadow:  5px 5px 16px rgba(255, 106, 106, 0.422),
+                    -5px -5px 16px rgba(138, 57, 57, 0.471);
+        -webkit-backdrop-filter: blur(5px);
+        backdrop-filter: blur(20px);
+    
+    }
+
+    #form-login {
+        width: 90%;
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    input, button {
+        height: 2rem;
+        border-radius: 10px;
+    }
+
+    .titulo {
+        font-size: 20px;
+        color: rgb(73, 73, 73);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .btn-submit {
+        --linear-gradient1: #ff0000;
+        --linear-gradient2: #ff3939;
+        --glow: rgb(255, 86, 71);;
+        --text-color: rgba(255, 255, 255, 0.785);
+        --animation: pulse512 1.5s infinite;
+        padding: 0.4em 1em;
+    }
+
+    .btn {
+        border: none;
+        color: var(--text-color);
+        background-image: linear-gradient(30deg, var(--linear-gradient1), var(--linear-gradient2));
+        border-radius: 20px;
+        background-size: 100% auto;
+        font-family: inherit;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn:hover {
+        color: white;
+        animation: var(--animation);
+        -webkit-animation: var(--animation);
+    }
+
+    .btn:disabled, .btn-sm {
+        color: white;
+    }
+
+    .form-control:focus {
+    border-color: none;
+    background-color: #ffffff29;
+    outline: 0;
+    box-shadow: 0 0 0 1px #ff00005c!important;
+    }
+
+    .form-control::placeholder, .texto {
+        color: rgb(73, 73, 73);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        text-align: justify;
+    }
+
+    .form-control {
+        background-color: #ffffff6b;
+        border: none;
+    }
+
+    @keyframes pulse512 {
+        0% {
+          box-shadow: 0 0 0 0 var(--glow);
+        }
+    
+        70% {
+          box-shadow: 0 0 0 10px rgba(218, 103, 68, 0%);
+        }
+    
+        100% {
+          box-shadow: 0 0 0 0 rgba(218, 103, 68, 0%);
+        }
+    }
+
+    .balls-background {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: wheat;
+    filter: blur(5px);
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+<script> // Funções
+    const botao = document.querySelector("#enviar");
+    const usuario = document.querySelector("#usuario");
+    const card1 = document.querySelector("#card1");
+    const card2 = document.querySelector("#card2");
+    const erro = document.querySelector("#erro");
+    const tituloCard2 = document.querySelector(".titulo.card-2");
+    const VoucherLabel = document.querySelector("#VoucherLabel");
+    const toast = document.querySelector("#liveToastBtn");
+    
+    function fecharToast() {
+        const botaoFechar = document.querySelector("#fechar");
+        botaoFechar.click();
+
+    }
+    function verificar(valor) {
+        const senha = document.querySelector("#senha");
+        if (usuario.value != "" && senha.value != ""){
+            botao.disabled = false
+        } else {
+            botao.disabled = true
+        }
+    }
+    
+    function checkEnter(event) {
+        if (event.keyCode === 13) {
+            logar(); 
+        }
+    }
+
+    function logar() {
+        console.log(senha.value, usuario.value)
+        if (usuario.value != "" && senha.value == "Teste"){
+            card1.style.display = "none";
+            tituloCard2.textContent = "✨ Olá, " + usuario.value + " ✨"
+            VoucherLabel.textContent = " 🎉 Parabéns, " + usuario.value + "! 🎉"
+            card2.style.display = "flex";
+            toast.click();
+        } else {
+            if (senha.value != "Teste") {
+                erro.textContent = "Senha incorreta!";
+            }
+
+            erro.style.display = "flex";
+        }
+    }
+
+</script>
+
+<script> // Toast
+    const toastTrigger = document.getElementById('liveToastBtn');
+const toastLiveExample = document.getElementById('liveToast');
+
+if (toastTrigger) {
+  const toastBootstrap = new bootstrap.Toast(toastLiveExample, { autohide: false }); 
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show();
+  });
+}
+</script>
+
+<script> // Modal
+const myModal = document.getElementById('myModal')
+const myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', () => {
+  myInput.focus()
+})
+</script>
+</html>
